@@ -1,5 +1,4 @@
 <?php
-session_start();
 $alert = '';
 $userid = (int) $_GET['id'];
 if ($userid == null || gettype($userid) != 'integer') {
