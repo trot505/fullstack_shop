@@ -1,6 +1,13 @@
 <?php
 $title = 'Список пользователей';
 require_once '../../templates/header.php';
+$session_id = $_SESSION['user']['id'];
+if ($session_id != 1) exit('<div class="alert alert-danger d-flex align-items-center" role="alert">
+<i class="fas fa-skull-crossbones fs-3 me-3"></i>
+<div>
+  Вами предпринята попытка взолма. Досвидули!
+</div>
+</div>');
 ?>
 
 <div class="container-fluid">
@@ -8,18 +15,23 @@ require_once '../../templates/header.php';
             <thead class="thead-inverse">
                 <tr>
                     <th>ID</th>
-                    <th>NAME</th>
+                    <th>Имя</th>
                     <th>E-MAIL</th>
-                    <th>CITY</th>
-                    <th>ACTIONS</th>
+                    <th>ГОРОД</th>
+                    <th>РОЛЬ</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 try {
-                    $sql = 'SELECT  u.*, c.name as city FROM users as u LEFT JOIN cities as c ON u.city_id = c.id';
+                    $sql = 'SELECT  u.*, 
+                                c.name as city,
+                                r.name as role 
+                            FROM users as u 
+                            LEFT JOIN cities as c ON u.city_id = c.id
+                            LEFT JOIN roles as r ON u.role_id = r.id';
                     $users = $pdo->query($sql)->fetchAll();
-                    $cities = $pdo->query("SELECT id as c_id, name as c_city FROM cities")->fetchAll();
 
                     $h = '';
                     foreach ($users as $key => $user) {
@@ -27,12 +39,13 @@ require_once '../../templates/header.php';
                         $h .= "<tr>
                         <td scope='row'>$id</td>
                         <td>
-                            <a href='user.php?id=$id'>
+                            <a href='edit_user.php?id=$id'>
                                 $name
                             </a>
                         </td>
                         <td>$email</td>
                         <td>$city</td>
+                        <td>$role</td>
                         <td>
                             <div class='btn-group' role='group'>
                                 <form action='../../actions/del_user.php' method='POST'>
@@ -42,12 +55,6 @@ require_once '../../templates/header.php';
                             </div>
                         </td>
                     </tr>";
-                    }
-
-                    $opt = '';
-                    foreach ($cities as $k => $c) {
-                        extract($c, EXTR_OVERWRITE);
-                        $opt .= "<option value='$c_id'>$c_city</option>";
                     }
                 } catch (PDOException $e) {
                     $h = $e->getMessage();

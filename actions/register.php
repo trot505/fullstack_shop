@@ -10,8 +10,8 @@ $res = $pdo->prepare($sql);
 var_dump($res->execute([
     ':name' => $name,
     ':email' => $email,
-    ':password' => $password,
+    ':password' => md5($password),
     ':city_id' => $city_id
 ]));
 
-header('Location: index.php');
+header('Location: /index.php');

@@ -9,7 +9,7 @@ $sql = "SELECT * FROM users WHERE email = :email AND password = :password";
 $r = $pdo->prepare($sql);
 
 $r->execute([
-    'password' => $password,
+    'password' => md5($password),
     'email' => $email
 ]);
 

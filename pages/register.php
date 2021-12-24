@@ -9,9 +9,9 @@ foreach ($cities as $k => $c) {
 }
 ?>
     <form action="../actions/register.php" method="POST">
-            <input type="text" class="form-control mb-3" name="name" aria-describedby="helpId" placeholder="Имя">
-            <input type="email" class="form-control mb-3" name="email" aria-describedby="emailHelpId" placeholder="Электронная почта">
-            <input type="password" class="form-control mb-3" name="password" placeholder="Пароль">
+            <input type="text" class="form-control mb-3" name="name" placeholder="Имя" required>
+            <input type="email" class="form-control mb-3" name="email" placeholder="Электронная почта" required>
+            <input type="password" class="form-control mb-3" name="password" placeholder="Пароль" required>
             <select class="form-select mb-3" name="city_id">
                 <option selected disabled>--Выберете город--</option>
                 <?= $opt ?>

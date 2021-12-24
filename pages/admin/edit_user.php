@@ -1,11 +1,18 @@
 <?php
+$title = 'Редактирование пользователя.';
+require_once '../../templates/header.php';
 $alert = '';
 $userid = (int) $_GET['id'];
+$session_id = $_SESSION['user']['id'];
+if ($session_id != 1 && $session_id != $userid) exit('<div class="alert alert-danger d-flex align-items-center" role="alert">
+<i class="fas fa-skull-crossbones fs-3 me-3"></i>
+<div>
+  Вами предпринята попытка взолма. Досвидули!
+</div>
+</div>');
 if ($userid == null || gettype($userid) != 'integer') {
 	exit("Неверные данные");
 }
-$pdo = new PDO('mysql:dbname=fullstack;host=127.0.0.1', 'mois', 'mois');
-
 $sql = 'SELECT * FROM users WHERE id = :id';
 
 $res = $pdo->prepare($sql);
@@ -18,14 +25,22 @@ if (!$user) exit("Такой пользователь не найден");
 extract($user, EXTR_OVERWRITE);
 
 $cities = $pdo->query("SELECT id as c_id, name as c_city FROM cities")->fetchAll();
+$roles = $pdo->query("SELECT id as r_id, name as r_role FROM roles")->fetchAll();
 
-$opt = '';
+$opt_cities = '';
 foreach ($cities as $k => $c) {
 	extract($c, EXTR_OVERWRITE);
 	$selected = ($city_id && $city_id == $c_id) ? ' selected' : '';
-	$opt .= "<option $selected value='$c_id'>$c_city</option>";
+	$opt_cities .= "<option $selected value='$c_id'>$c_city</option>";
 }
-$opt = (!$city_id) ? "<option selected disabled>Выберите город</option> $opt" : "$opt <option value=''>Исключить город</option>";
+$opt_cities = (!$city_id) ? "<option selected disabled>Выберите город</option> $opt_cities" : "$opt_cities <option value=''>Исключить город</option>";
+
+$opt_roles = '';
+foreach ($roles as $l => $r) {
+	extract($r, EXTR_OVERWRITE);
+	$selected = ($role_id && $role_id == $r_id) ? ' selected' : '';
+	$opt_roles .= "<option $selected value='$r_id'>$r_role</option>";
+}
 if ($_SESSION['error']) {
 	$alert = "<div class='alert alert-danger' role='alert'>{$_SESSION['error']}</div>";
 	unset($_SESSION['error']);
@@ -46,21 +61,19 @@ if ($_SESSION['error']) {
 </head>
 
 <body>
-	<div class="container-fluid">
+	<div class="container-fluid mt-3">
 		<?= $alert ?>
 		<form action="../actions/update_user.php" method="POST">
 			<input name="id" hidden value="<?= $id ?>">
 			<input type="text" class="form-control mb-3" name="name" aria-describedby="helpId" placeholder="Имя" value="<?= $name ?>">
 			<input type="email" class="form-control mb-3" name="email" aria-describedby="emailHelpId" placeholder="Электронная почта" value="<?= $email ?>">
+            <select class="form-select mb-3" name="role_id">
+				<?= $opt_roles ?>
+			</select>
 			<select class="form-select mb-3" name="city_id">
-				<?= $opt ?>
+				<?= $opt_cities ?>
 			</select>
 			<button type="submit" class="btn btn-primary w-100">Сохранить</button>
 		</form>
 	</div>
-	<!-- Bootstrap JavaScript Libraries -->
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-</body>
-
-</html>
+	<?php require_once '../../templates/footer.php';?>
