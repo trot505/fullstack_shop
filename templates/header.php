@@ -36,24 +36,7 @@ require_once "$r_path/config.php";
                         <?php } ?>
                     </ul>
                 </div>
-                <?php if ($_SESSION['user']) {?>
-                    <ul class="navbar-nav me-auto mt-2 mt-lg-0 d-flex">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user-secret fs-4 me-3"></i>
-                                <?= $_SESSION['user']['name']?>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                                <li><a class="dropdown-item" href="/pages/admin/edit_user.php?id=<?= $_SESSION['user']['id']?>"><i class="fas fa-user-edit me-1"></i>Личный кабинет</a></li>
-                                <?php if ($_SESSION['user']['role_id'] == 1) {?>
-                                <li><a class="dropdown-item" href="/pages/admin/users.php"><i class="fas fa-users me-1"></i>Пользователи</a></li>
-                                <?php }?>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="/actions/logout.php">Выход</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                <?php }?>
+                <?php require_once "$r_path/templates/user_menu.php";?>
             </div>
         </nav>
     </header>

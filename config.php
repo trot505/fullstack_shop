@@ -1,5 +1,7 @@
 <?php
 session_start();
+//$r_path = $_SERVER['DOCUMENT_ROOT'];
+
 $db_name = 'fullstack';
 $u = 'mois';
 $p = 'mois';

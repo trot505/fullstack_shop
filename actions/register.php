@@ -6,7 +6,7 @@ extract($_POST, EXTR_OVERWRITE);
 $sql = "insert into users (name,email,password,city_id)
         values (:name,:email,:password,:city_id)";
 $res = $pdo->prepare($sql);
-echo '11111';
+
 $status = $res->execute([
     ':name' => $name,
     ':email' => $email,

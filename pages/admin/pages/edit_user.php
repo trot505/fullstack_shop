@@ -1,6 +1,6 @@
 <?php
 $title = 'Редактирование пользователя.';
-require_once '../../templates/header.php';
+require_once '../templates/header.php';
 $alert = '';
 $userid = (int) $_GET['id'];
 $session_id = $_SESSION['user']['id'];
@@ -61,9 +61,9 @@ if ($_SESSION['error']) {
 </head>
 
 <body>
-	<div class="container-fluid mt-3">
+<section class='container-fluid mt-3'>
 		<?= $alert ?>
-		<form action="../actions/update_user.php" method="POST">
+		<form action="<?=$r_path?>/actions/update_user.php" method="POST">
 			<input name="id" hidden value="<?= $id ?>">
 			<input type="text" class="form-control mb-3" name="name" aria-describedby="helpId" placeholder="Имя" value="<?= $name ?>">
 			<input type="email" class="form-control mb-3" name="email" aria-describedby="emailHelpId" placeholder="Электронная почта" value="<?= $email ?>">
@@ -75,5 +75,5 @@ if ($_SESSION['error']) {
 			</select>
 			<button type="submit" class="btn btn-primary w-100">Сохранить</button>
 		</form>
-	</div>
-	<?php require_once '../../templates/footer.php';?>
+</section>
+	<?php require_once '../templates/footer.php';?>

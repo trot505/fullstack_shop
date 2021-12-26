@@ -1,26 +1,19 @@
 <?php 
+$title = 'Админка';
+require_once "templates/header.php";
+
 if ($session_id != 1) {
-    echo '<div class="alert alert-danger d-flex align-items-center" role="alert">
+    echo '<section class="container-fluid mt-3"><div class="alert alert-danger d-flex align-items-center" role="alert">
             <i class="fas fa-skull-crossbones fs-3 me-3"></i>
             <div>
             Вами предпринята попытка взолма. Досвидули!
             </div>
-            </div>';
-    require_once '../../templates/footer.php';
+            </div></section>';
+    require_once "templates/footer.php";
     die();
+} else {
+    echo "<section class='container-fluid mt-3'>
+            Лорема очень моркови усиливается в препарате.Мудрый болеуместитель, чтобы стать своей причиной, вариант труда правильный, достойный великого мужского, ненавидит свободных для удовольствий долгов, чтобы сделать неисправную боль, где.Требуется подобное, связанное с открытием удовольствия, но вариант!Нет никаких услуг, чтобы получить трудоемкий фильм, в котором регулярно приду, он спрашивает, она делает это?Обязательно, какой-то какой-то дискомфорт потребитель оставит, все никогда не будут делать ненависть, даже с которыми.Обязанности важны, что потребности никогда не легко архитектора, медленным лицам, в любое время, отпущенное, чтобы выполнить лучшее или открытое, например, счастливого приветствия не знают, когда они приветствуются.Меньше?
+        </section>";
+    require_once "templates/footer.php";
 }
-$title = 'Админка';
-require_once 'templates/header.php';
-
-?>
-
-<div class='card'>
-    <img class='card-img-top' src='holder.js/100x180/' alt=''>
-    <div class='card-body'>
-        <h4 class='card-title'>Title</h4>
-        <p class='card-text'>Text</p>
-    </div>
-</div>
-
-
-<?php require_once '../../templates/footer.php';

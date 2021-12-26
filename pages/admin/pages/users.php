@@ -1,20 +1,10 @@
 <?php
 $title = 'Список пользователей';
-require_once '../../templates/header.php';
-$session_id = $_SESSION['user']['id'];
-if ($session_id != 1) {
-    echo '<div class="alert alert-danger d-flex align-items-center" role="alert">
-            <i class="fas fa-skull-crossbones fs-3 me-3"></i>
-            <div>
-            Вами предпринята попытка взолма. Досвидули!
-            </div>
-            </div>';
-    require_once '../../templates/footer.php';
-    die();
-}
+require_once '../templates/header.php';
+
 ?>
 
-<div class="container-fluid">
+<section class='container-fluid mt-3'>
         <table class="table table-striped">
             <thead class="thead-inverse">
                 <tr>
@@ -52,9 +42,9 @@ if ($session_id != 1) {
                         <td>$role</td>
                         <td>
                             <div class='btn-group' role='group'>
-                                <form action='../../actions/del_user.php' method='POST'>
+                                <form action='$r_path/actions/admin/del_user.php' method='POST'>
                                     <input hidden name='id' value='$id' />
-                                    <button type='submit' class='btn btn-danger'>x</button>
+                                    <button type='submit' class='btn btn-outline-danger'><i class='far fa-trash-alt'></i></button>
                                 </form>
                             </div>
                         </td>
@@ -68,5 +58,5 @@ if ($session_id != 1) {
                 ?>
             </tbody>
         </table>
-    </div>
-<?php require_once '../../templates/footer.php'; ?>
+    </section>
+<?php require_once '../templates/footer.php'; ?>

@@ -1,8 +1,7 @@
 <?php
-session_start();
-$pdo = new PDO('mysql:dbname=fullstack;host=127.0.0.1', 'mois', 'mois');
+require_once "../config.php";
+
 extract($_POST);
-var_dump(($city_id) ? $city_id : NULL);
 
 $sql = "UPDATE users SET name = :name, email = :email, city_id = :city_id WHERE id = :id";
 
@@ -16,5 +15,5 @@ $status  = $res->execute([
 
 if (!$status) {
     $_SESSION['error'] =  $res->errorInfo()[2];
-    header("Location: ../pages/user.php?id=$id");
-} else header("Location: ../index.php");
+    header("Location: /pages/user.php?id=$id");
+} else header("Location: /index.php");
