@@ -2,12 +2,16 @@
 $title = 'Список пользователей';
 require_once '../../templates/header.php';
 $session_id = $_SESSION['user']['id'];
-if ($session_id != 1) exit('<div class="alert alert-danger d-flex align-items-center" role="alert">
-<i class="fas fa-skull-crossbones fs-3 me-3"></i>
-<div>
-  Вами предпринята попытка взолма. Досвидули!
-</div>
-</div>');
+if ($session_id != 1) {
+    echo '<div class="alert alert-danger d-flex align-items-center" role="alert">
+            <i class="fas fa-skull-crossbones fs-3 me-3"></i>
+            <div>
+            Вами предпринята попытка взолма. Досвидули!
+            </div>
+            </div>';
+    require_once '../../templates/footer.php';
+    die();
+}
 ?>
 
 <div class="container-fluid">
