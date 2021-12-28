@@ -1,5 +1,5 @@
 <?php
-require_once '../../config';
+require_once '../../config.php';
 $id = $_POST['id'];
 
 $sql = "delete from users where id = :id";

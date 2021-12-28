@@ -38,3 +38,21 @@ CREATE TABLE `users` (
 LOCK TABLES `users` WRITE;
 INSERT INTO `users` VALUES (1,'Дмитрий','t@t.tu','fa33bb8306889dfb13889a04e62915c1',6,1);
 UNLOCK TABLES;
+
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE `categories` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `discription` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE `products` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `category_id` INT NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `amount` INT NULL DEFAULT 0,
+  `price` DOUBLE(8,3) NULL,
+  `discription` VARCHAR(45) NULL,
+  `image_path` VARCHAR(255) NULL,
+  PRIMARY KEY (`id`));

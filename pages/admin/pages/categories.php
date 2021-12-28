@@ -3,9 +3,9 @@ $title = 'Категории';
 require_once '../templates/header.php';
 
 $html = "<section class='container-fluid mt-3'>
-<form action='$r_path/actions/admin/add_category.php' method='POST'>
+<form action='/actions/admin/add_category.php' method='POST'>
 <input type='text' class='form-control mb-3' name='name' placeholder='Название категории' />
-<textarea class='form-control mb-3' name='discription'></textarea>
+<textarea class='form-control mb-3' name='discription' placeholder='Описание категории'></textarea>
 <button type='submit' class='btn btn-success w-100'>Создать категорию</button>
 </form>
 <table class='table table-striped mt-5'>
@@ -19,9 +19,9 @@ $html = "<section class='container-fluid mt-3'>
     </thead>
     <tbody>";
 
-//$sql = "SELECT * FROM categories";
+$sql = "SELECT * FROM categories";
 
-//$ctegories = $pdo->query($sql)->fetchAll();
+$ctegories = $pdo->query($sql)->fetchAll();
 
 $cat = '';
 if($ctegories){
@@ -32,7 +32,7 @@ if($ctegories){
                     <td>$description</td>
                     <td>
                         <div class='btn-group' role='group'>
-                            <form action='$r_path/actions/admin/del_category.php' method='POST'>
+                            <form action='/actions/admin/del_category.php' method='POST'>
                                 <input hidden name='id' value='$id' />
                                 <button type='submit' class='btn btn-outline-danger'><i class='far fa-trash-alt'></i></button>
                             </form>
