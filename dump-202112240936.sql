@@ -46,7 +46,7 @@ CREATE TABLE `categories` (
   `discription` VARCHAR(45) NULL,
   PRIMARY KEY (`id`));
 
-DROP TABLE IF EXISTS `categories`;
+DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `category_id` INT NOT NULL,
@@ -55,4 +55,6 @@ CREATE TABLE `products` (
   `price` DOUBLE(8,3) NULL,
   `discription` VARCHAR(45) NULL,
   `image_path` VARCHAR(255) NULL,
-  PRIMARY KEY (`id`));
+  PRIMARY KEY (`id`),
+  CONSTRAINT `products_categories_FK` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),  
+);
