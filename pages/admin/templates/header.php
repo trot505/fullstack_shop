@@ -1,6 +1,6 @@
 <?php
-$r_path = $_SERVER['DOCUMENT_ROOT'];
-require_once "$r_path/config.php";
+$DIR_PATH = $_SERVER['DOCUMENT_ROOT'];
+require_once "$DIR_PATH/config.php";
 
 echo "<!doctype html>
 <html lang='ru'>
@@ -26,12 +26,12 @@ if ($session_id != 1) {
             </div>';
 
     echo $err_html;
-    require_once '$r_path/templates/footer.php';
+    require_once '$DIR_PATH/templates/footer.php';
     sleep(4);
     header("Location: /");
 } else {
     $user_menu = 
-    require_once "$r_path/pages/admin/routs/index.php";
+    require_once "$DIR_PATH/pages/admin/routs/index.php";
     
     $menu = '';
     foreach ($routs as $rout){
@@ -49,6 +49,6 @@ if ($session_id != 1) {
                             $menu
                         </ul>
                     </div>";
-    require_once "$r_path/templates/user_menu.php";
+    require_once "$DIR_PATH/templates/user_menu.php";
     echo "</div></nav></header>";
 }    

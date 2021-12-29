@@ -1,6 +1,7 @@
 <?php
-$r_path = $_SERVER['DOCUMENT_ROOT'];
-require_once "$r_path/config.php";
+$DIR_PATH = $_SERVER['DOCUMENT_ROOT'];
+
+require_once "$DIR_PATH/config.php";
 ?>
 <!doctype html>
 <html lang="ru">
@@ -36,7 +37,7 @@ require_once "$r_path/config.php";
                         <?php } ?>
                     </ul>
                 </div>
-                <?php require_once "$r_path/templates/user_menu.php";?>
+                <?php require_once "$DIR_PATH/templates/user_menu.php";?>
             </div>
         </nav>
     </header>

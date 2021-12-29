@@ -42,7 +42,7 @@ require_once '../templates/header.php';
                         <td>$role</td>
                         <td>
                             <div class='btn-group' role='group'>
-                                <form action='$r_path/actions/admin/del_user.php' method='POST'>
+                                <form action='/actions/admin/del_user.php' method='POST'>
                                     <input hidden name='id' value='$id' />
                                     <button type='submit' class='btn btn-outline-danger'><i class='far fa-trash-alt'></i></button>
                                 </form>

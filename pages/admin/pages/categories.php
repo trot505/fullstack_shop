@@ -1,12 +1,20 @@
 <?php
 $title = 'Категории';
 require_once '../templates/header.php';
-
+$name_p = ($_SESSION['cat_fields']['name'])?"value='{$_SESSION['fields']['name']}'":'';
+$name_err = ($_SESSION['cat_err']['name'])?"is-invalid":'';
+$description_p = ($_SESSION['cat_fields']['description'])?"value='{$_SESSION['fields']['description']}'":'';
 $html = "<section class='container-fluid mt-3'>
 <form action='/actions/admin/add_category.php' method='POST'>
-<input type='text' class='form-control mb-3' name='name' placeholder='Название категории' />
-<textarea class='form-control mb-3' name='discription' placeholder='Описание категории'></textarea>
-<button type='submit' class='btn btn-success w-100'>Создать категорию</button>
+<div class='mb-2 form-floating'>
+    <input class='form-control $name_err' type='text' id='name' placeholder='Название категории' name='name' $name_p required/>
+    <label for='name'>Название категории</label>
+</div>
+<div class='mb-2 form-floating'>
+    <textarea class='form-control' id='description' name='description' placeholder='Описание категории'>$description_p</textarea>
+    <label for='discription'>Описание категории</label>
+</div>
+<button type='submit' class='btn btn-success w-100 mt-4'>Создать категорию</button>
 </form>
 <table class='table table-striped mt-5'>
     <thead class='thead-inverse'>
@@ -20,7 +28,6 @@ $html = "<section class='container-fluid mt-3'>
     <tbody>";
 
 $sql = "SELECT * FROM categories";
-
 $ctegories = $pdo->query($sql)->fetchAll();
 
 $cat = '';
