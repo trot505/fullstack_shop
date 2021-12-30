@@ -1,14 +1,16 @@
 <?php
 $title = 'Категории';
 require_once '../templates/header.php';
-$name_p = ($_SESSION['cat_fields']['name'])?"value='{$_SESSION['fields']['name']}'":'';
+$name_p = ($_SESSION['cat_fields']['name'])?"value='{$_SESSION['cat_fields']['name']}'":'';
 $name_err = ($_SESSION['cat_err']['name'])?"is-invalid":'';
-$description_p = ($_SESSION['cat_fields']['description'])?"value='{$_SESSION['fields']['description']}'":'';
+$name_label = ($_SESSION['cat_err']['name'])?$_SESSION['cat_err']['name']:'Название категории';
+$name_err = ($_SESSION['cat_err']['name'])?"is-invalid":'Название категории';
+$description_p = ($_SESSION['cat_fields']['description'])?$_SESSION['cat_fields']['description']:'';
 $html = "<section class='container-fluid mt-3'>
 <form action='/actions/admin/add_category.php' method='POST'>
 <div class='mb-2 form-floating'>
-    <input class='form-control $name_err' type='text' id='name' placeholder='Название категории' name='name' $name_p required/>
-    <label for='name'>Название категории</label>
+    <input class='form-control $name_err' type='text' id='name' placeholder='$name_label' name='name' $name_p />
+    <label for='name'>$name_label</label>
 </div>
 <div class='mb-2 form-floating'>
     <textarea class='form-control' id='description' name='description' placeholder='Описание категории'>$description_p</textarea>
@@ -33,6 +35,7 @@ $ctegories = $pdo->query($sql)->fetchAll();
 $cat = '';
 if($ctegories){
     foreach ($ctegories as $category){
+        extract($category, EXTR_OVERWRITE);
         $cat .= "<tr>
                     <td scope='row'>$id</td>
                     <td>$name</td>

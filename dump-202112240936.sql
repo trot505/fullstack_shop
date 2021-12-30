@@ -43,7 +43,7 @@ DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
-  `discription` VARCHAR(45) NULL,
+  `description` VARCHAR(45) NULL,
   PRIMARY KEY (`id`));
 
 DROP TABLE IF EXISTS `products`;
@@ -53,8 +53,8 @@ CREATE TABLE `products` (
   `name` VARCHAR(255) NOT NULL,
   `amount` INT NULL DEFAULT 0,
   `price` DOUBLE(8,3) NULL,
-  `discription` VARCHAR(45) NULL,
-  `image_path` VARCHAR(255) NULL,
+  `description` VARCHAR(45) NULL,
+  `image_name` VARCHAR(255) NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `products_categories_FK` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),  
+  CONSTRAINT `products_categories_FK` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
 );

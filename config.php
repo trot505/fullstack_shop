@@ -1,8 +1,8 @@
 <?php
 session_start();
 $DIR_PATH = $_SERVER['DOCUMENT_ROOT'];
-$DIR_IMG_PATH = $DIR_PATH."//images";
-$DIR_IMG_PRODUCTS_PATH = $DIR_IMG_PATH."//products";
+$DIR_IMG_PATH = $DIR_PATH."/images";
+$DIR_IMG_PRODUCTS_PATH = $DIR_IMG_PATH."/products";
 
 $db_name = 'fullstack';
 $u = 'mois';
